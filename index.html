@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitPilot - Visual Git Workflow Excellence</title>
+    <meta name="description" content="GitPilot is an advanced visual Git workflow management and execution platform.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="dark-theme">
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-code-merge logo-icon"></i>
+                <span>GitPilot</span>
+            </a>
+            
+            <div class="nav-actions">
+                <a href="https://github.com" target="_blank" class="btn btn-outline" aria-label="Github"><i class="fa-brands fa-github"></i> Star</a>
+                <a href="#download" class="btn btn-primary">Get Started</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero-bg-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <div class="badge fade-in-up">Visually Manage Git</div>
+                <h1 class="fade-in-up delay-1">Stop fighting git.<br><span class="text-gradient">Start piloting it.</span></h1>
+                <p class="fade-in-up delay-2">An advanced visual Git workflow management and execution platform. Drag, drop, merge, and launch your workflows in real-time without ever touching the CLI.</p>
+                <div class="hero-cta fade-in-up delay-3">
+                    <a href="#download" class="btn btn-primary btn-lg">Launch GitPilot <i class="fa-solid fa-rocket"></i></a>
+                    <a href="#how-it-works" class="btn btn-outline btn-lg">See it in action</a>
+                </div>
+            </div>
+            <div class="hero-visual fade-in delay-4">
+                <div class="glass-panel editor-mockup">
+                    <div class="editor-header">
+                        <div class="window-controls">
+                            <span class="dot close"></span>
+                            <span class="dot minimize"></span>
+                            <span class="dot maximize"></span>
+                        </div>
+                        <div class="window-title">GitPilot - Visual Editor</div>
+                    </div>
+                    <div class="editor-body">
+                        <!-- Simulated Visual Graph -->
+                        <div class="graph-container" id="hero-graph">
+                            <div class="node node-main" style="top: 20%; left: 10%;">
+                                <i class="fa-solid fa-code-branch"></i> main
+                            </div>
+                            <svg class="connection-line" style="position:absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;">
+                                <path id="anim-path-1" d="M 120 70 C 200 70, 200 150, 280 150" fill="none" class="animated-path stroke-primary" />
+                                <path id="anim-path-2" d="M 120 70 C 200 70, 200 250, 280 250" fill="none" class="animated-path stroke-secondary" />
+                            </svg>
+                            <div class="node node-feature glow" style="top: 40%; left: 40%;">
+                                <i class="fa-solid fa-code-branch"></i> feature/auth
+                            </div>
+                            <div class="node node-feature" style="top: 70%; left: 40%;">
+                                <i class="fa-solid fa-code-branch"></i> feature/ui-revamp
+                            </div>
+                            <!-- Live Terminal Overlay -->
+                            <div class="terminal-overlay glass-panel-dark">
+                                <div class="terminal-header">Terminal</div>
+                                <div class="terminal-content" id="terminal-typing"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <h2 class="text-gradient">Built for Modern Workflows</h2>
+                <p>Execute complex operations effortlessly with real-time feedback.</p>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect">
+                    <div class="feature-icon icon-gradient-1">
+                        <i class="fa-solid fa-diagram-project"></i>
+                    </div>
+                    <h3>Visual Workflow Editor</h3>
+                    <p>Drag-and-drop interface for creating and managing intricate Git branch networks.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect delay-1">
+                    <div class="feature-icon icon-gradient-2">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3>Real-time Execution</h3>
+                    <p>Execute workflows with live progress tracking powered by WebSockets.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect delay-2">
+                    <div class="feature-icon icon-gradient-3">
+                        <i class="fa-solid fa-code-commit"></i>
+                    </div>
+                    <h3>Dependency Resolution</h3>
+                    <p>Automatic parallel execution of independent operations for lightning-fast results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Sections (How It Works) -->
+    <section class="showcase-section" id="how-it-works">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <h2 class="text-gradient">Master Your Workflow</h2>
+                <p>See how GitPilot transforms complex operations into visual simplicity.</p>
+            </div>
+
+            <!-- Showcase 1: Workflow Creation -->
+            <div class="showcase-row reveal">
+                <div class="showcase-text">
+                    <div class="badge">Step 1</div>
+                    <h3 class="text-gradient">Visual Workflow Creation</h3>
+                    <p>Stop wrestling with long strings of terminal commands. GitPilot's intuitive drag-and-drop interface lets you map out your entire branching strategy visually.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-check text-success"></i> Drag to connect branches and establish dependencies</li>
+                        <li><i class="fa-solid fa-check text-success"></i> Configure merge strategies and rebase options inline</li>
+                        <li><i class="fa-solid fa-check text-success"></i> Catch conflicts before they happen with dry-run previews</li>
+                    </ul>
+                </div>
+                <div class="showcase-visual">
+                    <div class="glass-panel mockup-panel outline-primary">
+                        <div class="mockup-header">
+                            <i class="fa-solid fa-diagram-project"></i> Workflow Canvas
+                        </div>
+                        <div class="mockup-body canvas-bg" style="position: relative;">
+                            <!-- Centered rigid cluster -->
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 320px; height: 250px;">
+                                <!-- SVG Connections -->
+                                <svg width="320" height="250" style="position:absolute; top:0; left:0; z-index: 1; pointer-events: none;">
+                                    <defs>
+                                        <marker id="arrow-pf" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(99,102,241,0.6)" />
+                                        </marker>
+                                        <marker id="arrow-pm" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                                            <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(245,158,11,0.6)" />
+                                        </marker>
+                                    </defs>
+                                    <!-- Checkout path -->
+                                    <path d="M 110 50 C 150 50, 150 125, 190 125" fill="none" stroke="rgba(99,102,241,0.6)" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-pf)"/>
+                                    <!-- Merge path -->
+                                    <path d="M 120 200 C 160 200, 160 125, 190 125" fill="none" stroke="rgba(245,158,11,0.6)" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrow-pm)"/>
+                                </svg>
+
+                                <!-- Nodes -->
+                                <div class="mock-node" style="position: absolute; top: 50px; left: 60px; transform: translate(-50%, -50%); border-color: var(--accent-success); color: var(--accent-success); z-index: 2;">
+                                    <i class="fa-solid fa-code-branch"></i> main
+                                </div>
+                                
+                                <div class="mock-node" style="position: absolute; top: 200px; left: 60px; transform: translate(-50%, -50%); border-color: var(--accent-warning); color: var(--accent-warning); z-index: 2;">
+                                    <i class="fa-solid fa-code-branch"></i> release
+                                </div>
+                                
+                                <div class="mock-node" style="position: absolute; top: 125px; left: 250px; transform: translate(-50%, -50%); border-color: var(--accent-primary); color: var(--accent-primary); z-index: 2; box-shadow: 0 0 15px rgba(99,102,241,0.2);">
+                                    <i class="fa-solid fa-code-branch"></i> feature/ui
+                                </div>
+
+                                <!-- Operations -->
+                                <div style="position: absolute; top: 87px; left: 150px; transform: translate(-50%, -50%); background: var(--bg-card); padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid rgba(99,102,241,0.3); font-size: 0.65rem; font-family: var(--font-mono); color: var(--text-secondary); z-index: 5;">
+                                    checkout
+                                </div>
+                                <div style="position: absolute; top: 163px; left: 155px; transform: translate(-50%, -50%); background: var(--bg-card); padding: 0.2rem 0.4rem; border-radius: 4px; border: 1px solid rgba(245,158,11,0.3); font-size: 0.65rem; font-family: var(--font-mono); color: var(--text-secondary); z-index: 5;">
+                                    merge
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Showcase 2: Preview Operations -->
+            <div class="showcase-row reverse reveal">
+                <div class="showcase-text">
+                    <div class="badge">Step 2</div>
+                    <h3 class="text-gradient">Preview Before You Commit</h3>
+                    <p>Never run a destructive command blindly again. GitPilot's Preview mode analyzes your workflow and shows you exactly what Git commands will be executed under the hood before a single byte is changed.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-eye text-primary"></i> See the raw CLI commands your visual workflow generates</li>
+                        <li><i class="fa-solid fa-eye text-primary"></i> Identify potential conflicts or destructive actions early</li>
+                        <li><i class="fa-solid fa-eye text-primary"></i> Export command scripts for manual CLI execution if preferred</li>
+                    </ul>
+                </div>
+                <div class="showcase-visual">
+                    <div class="glass-panel mockup-panel outline-secondary">
+                        <div class="mockup-header">
+                            <i class="fa-solid fa-magnifying-glass"></i> Pre-flight Preview
+                        </div>
+                        <div class="mockup-body preview-bg" id="showcase-preview-actions">
+                            <div class="preview-cmd-list">
+                                <div class="p-cmd"><i class="fa-solid fa-angle-right"></i> git checkout -b feature/auth</div>
+                                <div class="p-cmd"><i class="fa-solid fa-angle-right"></i> git push -u origin feature/auth</div>
+                                <div class="p-cmd warning"><i class="fa-solid fa-triangle-exclamation"></i> git merge development --no-ff</div>
+                                <div class="p-btn-row">
+                                    <button class="btn btn-primary btn-sm">Looks Good, Execute</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Showcase 3: Real-time Execution -->
+            <div class="showcase-row reveal">
+                <div class="showcase-text">
+                    <div class="badge">Step 3</div>
+                    <h3 class="text-gradient">Lightning-Fast Execution</h3>
+                    <p>Hit the launch button and watch your plan come to life. GitPilot automatically identifies independent operations and runs them in parallel.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-bolt text-warning"></i> WebSocket-powered live progress updates</li>
+                        <li><i class="fa-solid fa-bolt text-warning"></i> Automatic parallel dependency resolution</li>
+                        <li><i class="fa-solid fa-bolt text-warning"></i> One-click pause, stop, or rollback on failure</li>
+                    </ul>
+                </div>
+                <div class="showcase-visual">
+                    <div class="glass-panel mockup-panel outline-warning">
+                        <div class="mockup-header">
+                            <i class="fa-solid fa-server"></i> Execution Engine
+                        </div>
+                        <div class="mockup-body align-center exec-bg">
+                            <div class="exec-pipeline">
+                                <div class="exec-stage stage-done">Fetch</div>
+                                <div class="exec-stage stage-running pulse-glow">Checkout</div>
+                                <div class="exec-stage stage-pending">Merge</div>
+                                <div class="exec-stage stage-pending">Push</div>
+                            </div>
+                            <!-- Animated data packets -->
+                            <div class="packet p1"></div>
+                            <div class="packet p2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Showcase 4: Execution Logs -->
+            <div class="showcase-row reverse reveal">
+                <div class="showcase-text">
+                    <div class="badge">Step 4</div>
+                    <h3 class="text-gradient">Crystal Clear Logging</h3>
+                    <p>Never lose track of what happened. Every raw git command, output trace, and system event is beautifully logged, searchable, and persistently stored.</p>
+                    <ul class="feature-list">
+                        <li><i class="fa-solid fa-terminal text-tertiary"></i> Exact matching of GUI actions to underlying CLI commands</li>
+                        <li><i class="fa-solid fa-terminal text-tertiary"></i> Color-coded success, warning, and error states</li>
+                        <li><i class="fa-solid fa-terminal text-tertiary"></i> Easily copy logs or commands to share with your team</li>
+                    </ul>
+                </div>
+                <div class="showcase-visual">
+                    <div class="glass-panel mockup-panel mock-terminal outline-tertiary">
+                        <div class="mockup-header terminal-header">
+                            <div class="window-controls"><span class="dot close"></span><span class="dot minimize"></span><span class="dot maximize"></span></div>
+                            <span>execution.log</span>
+                        </div>
+                        <div class="mockup-body terminal-body" id="showcase-terminal-logs">
+                            <!-- Logs injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience Section -->
+    <section class="audience-section" id="audience" style="padding: 2rem 0 8rem; position: relative; z-index: 10;">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <h2 class="text-gradient">Is GitPilot Right For You?</h2>
+                <p>GitPilot is built for developers who want to automate away the friction and bulletproof their Git processes.</p>
+            </div>
+            <div class="features-grid">
+                <!-- Card 1 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect">
+                    <div class="feature-icon icon-gradient-3">
+                        <i class="fa-solid fa-repeat"></i>
+                    </div>
+                    <h3>Repetitive Workflows</h3>
+                    <p>You execute the same complex sequence of git commands daily and want to automate the friction away.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect delay-1">
+                    <div class="feature-icon icon-gradient-2">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3>Zero Room for Mistakes</h3>
+                    <p>You work on critical repositories where a single human error during a rebase or merge can cost hours of recovery.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect delay-2">
+                    <div class="feature-icon icon-gradient-4">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3>Visual Thinkers</h3>
+                    <p>You prefer seeing your branching strategy and dependencies laid out visually rather than parsing raw terminal output.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect">
+                    <div class="feature-icon icon-gradient-1">
+                        <i class="fa-solid fa-code-branch"></i>
+                    </div>
+                    <h3>Complex Branching</h3>
+                    <p>You manage multi-branch features where different parts need to be merged and executed in a specific parallel order.</p>
+                </div>
+                <!-- Card 5 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect delay-1">
+                    <div class="feature-icon icon-gradient-5">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3>Team Standardization</h3>
+                    <p>You want to enforce standard, error-free git workflows across your entire team without writing tedious bash scripts.</p>
+                </div>
+                <!-- Card 6 -->
+                <div class="feature-card glass-panel reveal hover-glow-effect delay-2">
+                    <div class="feature-icon icon-gradient-3">
+                        <i class="fa-solid fa-stopwatch"></i>
+                    </div>
+                    <h3>Efficiency Obsessed</h3>
+                    <p>You value your time. You want your tools to do the heavy lifting, instantly executing tasks and handling the boilerplate.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-top: 5rem;">
+                 <a href="https://github.com" target="_blank" class="btn btn-outline btn-lg mt-2" aria-label="Github"><i class="fa-brands fa-github"></i> Star</a>
+                 <a href="#download" class="btn btn-primary btn-lg mt-2">Start Piloting Now <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer pt-2">
+        <div class="footer-glow"></div>
+        <div class="container relative">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="#" class="logo mb-4">
+                        <i class="fa-solid fa-code-merge logo-icon"></i>
+                        <span>GitPilot</span>
+                    </a>
+                    <p>Visual Git Workflow Management.<br>Built for developers who value their time and sanity.</p>
+                    
+                    <div class="creator-badge mt-4" style="display: flex; align-items: center; gap: 1rem; padding: 1rem; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--border-radius-sm); width: fit-content; transition: var(--transition-normal);">
+                        <img src="https://github.com/himalaya0035.png" alt="Himalaya Gupta" style="width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--accent-primary);">
+                        <div>
+                            <p style="margin: 0; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;">Designed & Built by</p>
+                            <a href="https://github.com/himalaya0035" target="_blank" style="font-size: 1.1rem; font-weight: 700; color: white; display: flex; align-items: center; gap: 0.4rem; text-decoration: none;">
+                                Himalaya Gupta <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem; color: var(--text-muted);"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="link-grid">
+                    <div class="link-group">
+                        <h4>Product</h4>
+                        <a href="#features">Features</a>
+                        <a href="#how-it-works">How It Works</a>
+                        <a href="#architecture">Architecture</a>
+                        <a href="#download" class="text-primary">Download <span class="badge badge-sm">v1.0</span></a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Resources</h4>
+                        <a href="#">Usage</a>
+                        <a href="#">Blog</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="privacy.html">Privacy Policy</a>
+                        <a href="terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>
