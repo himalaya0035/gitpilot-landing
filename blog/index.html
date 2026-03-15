@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>GitPilot Blog - Engineering Excellence</title>
+    <meta name="title" content="GitPilot Blog - Engineering Excellence">
+    <meta name="description" content="Thoughts, guides, and tutorials on standardizing git workflows, avoiding CI/CD nightmares, and building shipping velocity from the team at GitPilot.">
+    <meta name="keywords" content="blog, git tutorials, git workflow, version control, software engineering, DevOps">
+    <meta name="author" content="Himalaya Gupta">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gitpilot.online/blog/">
+    <meta property="og:title" content="GitPilot Blog - Engineering Excellence">
+    <meta property="og:description" content="Thoughts, guides, and tutorials on standardizing git workflows, avoiding CI/CD nightmares, and building shipping velocity from the team at GitPilot.">
+    <meta property="og:site_name" content="GitPilot">
+
+    <!-- Canonical Link -->
+    <link rel="canonical" href="https://gitpilot.online/blog/">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .blog-index-header {
+            padding: 10rem 0 6rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            background: radial-gradient(circle at top, rgba(99,102,241,0.1), transparent 70%);
+        }
+        .blog-index-content {
+            padding: 4rem 1rem 8rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius-md);
+            padding: 2rem;
+            transition: var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--text-primary);
+            height: 100%;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 20px rgba(99,102,241,0.1);
+        }
+
+        .blog-card .badge {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            color: white;
+            transition: var(--transition-fast);
+        }
+
+        .blog-card:hover h3 {
+            color: var(--accent-primary);
+        }
+
+        .blog-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            flex-grow: 1;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .blog-meta-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 1rem;
+            margin-top: auto;
+        }
+        @media (max-width: 768px) {
+            .blog-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="dark-theme">
+
+    <!-- Minimal Nav -->
+    <nav class="navbar scrolled">
+        <div class="container nav-content">
+            <a href="../index.html" class="logo">
+                <i class="fa-solid fa-code-merge logo-icon"></i>
+                <span>GitPilot</span>
+            </a>
+            <div class="nav-actions">
+                <a href="https://github.com" target="_blank" class="btn btn-outline" aria-label="Github"><i class="fa-brands fa-github"></i> Star</a>
+                <a href="../index.html#download" class="btn btn-primary">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="blog-index-header">
+        <div class="container" style="max-width: 800px;">
+            <h1 class="text-gradient" style="font-size: 4rem; margin-bottom: 1.5rem;">GitPilot Engineering Blog</h1>
+            <p style="font-size: 1.25rem; color: var(--text-secondary); margin-bottom: 0;">Thoughts, guides, and deep-dives on scaling engineering teams, standardizing version control, and shipping unbreakable code.</p>
+        </div>
+    </header>
+
+    <main class="container blog-index-content">
+        
+        <div class="blog-grid">
+            
+            <!-- Article 1 -->
+            <a href="git-rebase-vs-merge.html" class="blog-card">
+                <div class="badge">Git Tutorials</div>
+                <h3>Git Rebase vs Merge: The Ultimate Visual Guide</h3>
+                <p>Stop destroying your git history. Learn exactly when to use git rebase versus git merge, and how to manage complex branches visually without terminal anxiety.</p>
+                <div class="blog-meta-card">
+                    <span>March 15, 2026</span>
+                    <span>6 min read</span>
+                </div>
+            </a>
+
+            <!-- Article 2 -->
+            <a href="trunk-based-development.html" class="blog-card">
+                <div class="badge" style="background: rgba(16,185,129,0.1); color: var(--accent-success); border-color: rgba(16,185,129,0.2);">DevOps Strategies</div>
+                <h3>Why Modern Teams are Ditching GitFlow for Trunk-Based Dev</h3>
+                <p>Learn why industry leaders are moving away from long-lived branches and embracing rapid, continuous integration workflows using feature flags to maximize velocity.</p>
+                <div class="blog-meta-card">
+                    <span>March 12, 2026</span>
+                    <span>5 min read</span>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer pt-2">
+        <div class="footer-glow"></div>
+        <div class="container relative">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo mb-4">
+                        <i class="fa-solid fa-code-merge logo-icon"></i>
+                        <span>GitPilot</span>
+                    </a>
+                    <p>Visual Git Workflow Management.<br>Built for developers who value their time and sanity.</p>
+                </div>
+                
+                <div class="link-grid">
+                    <div class="link-group">
+                        <h4>Company</h4>
+                        <a href="../privacy.html">Privacy Policy</a>
+                        <a href="../terms.html">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom mt-4">
+                <p>&copy; 2026 GitPilot. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

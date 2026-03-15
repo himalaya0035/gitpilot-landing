@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Block search engines from crawling the legal pages since they contain noindex tags anyway
+Disallow: /terms.html
+Disallow: /privacy.html
+
+# Sitemap location
+Sitemap: https://gitpilot.online/sitemap.xml
