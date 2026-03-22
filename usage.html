@@ -82,6 +82,9 @@
             flex: 1;
             max-width: 860px;
             padding: 3rem 4rem 6rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            min-width: 0;
         }
 
         .docs-main h1 {
@@ -235,10 +238,16 @@
         }
 
         /* ── Operations Table ── */
+        .ops-table-wrapper {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 1.5rem;
+        }
+
         .ops-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 1.5rem;
+            min-width: 480px;
         }
 
         .ops-table th, .ops-table td {
@@ -254,6 +263,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            white-space: nowrap;
         }
 
         .ops-table td { color: var(--text-secondary); }
@@ -345,7 +355,21 @@
             overflow-x: auto;
         }
 
-        /* ── Mobile Sidebar Toggle ── */
+        /* ── Mobile Menu Toggle (navbar) ── */
+        .docs-menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            margin-right: 0.5rem;
+        }
+
+        /* ── Mobile Sidebar Toggle (FAB) ── */
         .docs-sidebar-toggle {
             display: none;
             position: fixed;
@@ -376,9 +400,25 @@
             }
             .docs-sidebar.open { transform: translateX(0); }
             .docs-sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+            .docs-menu-toggle { display: flex; }
             .docs-main { margin-left: 0; padding: 2rem 1.5rem 5rem; }
             #footer-placeholder { margin-left: 0; }
             .feature-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .docs-main h1 { font-size: 1.75rem; }
+            .docs-main h2 { font-size: 1.35rem; }
+            .docs-main p, .docs-main li { font-size: 0.95rem; }
+            .nav-actions { gap: 0.5rem; }
+            .nav-actions .btn { font-size: 0.8rem; padding: 0.45rem 0.75rem; }
+        }
+
+        @media (max-width: 480px) {
+            .docs-main { padding: 1.5rem 1rem 4rem; }
+            .docs-main h1 { font-size: 1.5rem; }
+            .docs-card { padding: 1.25rem; }
+            .feature-item { padding: 1rem; }
         }
     </style>
 </head>
@@ -387,6 +427,9 @@
     <!-- Navbar -->
     <nav class="navbar scrolled">
         <div class="container nav-content">
+            <button class="docs-menu-toggle" id="navMenuToggle" aria-label="Open sidebar">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <a href="index.html" class="logo">
                 <i class="fa-solid fa-code-merge logo-icon"></i>
                 <span>GitPilot</span>
@@ -545,18 +588,20 @@ cd GitPilot</code></pre>
                 <h2>Operations</h2>
                 <p>Seven fully configurable Git operations:</p>
 
-                <table class="ops-table">
-                    <thead><tr><th>Operation</th><th>What it does</th></tr></thead>
-                    <tbody>
-                        <tr><td><strong>Checkout</strong></td><td>Create, switch, or reset branches. Force checkout supported.</td></tr>
-                        <tr><td><strong>Merge</strong></td><td>Standard, squash, or fast-forward merge with custom commit messages.</td></tr>
-                        <tr><td><strong>Rebase</strong></td><td>Rebase onto another branch. Interactive and <code>--onto</code> supported.</td></tr>
-                        <tr><td><strong>Push</strong></td><td>Push to remote with standard, <code>--force-with-lease</code>, or <code>--force</code> options.</td></tr>
-                        <tr><td><strong>Pull</strong></td><td>Fetch and merge from remote. Optional <code>--rebase</code> mode.</td></tr>
-                        <tr><td><strong>Delete Branch</strong></td><td>Delete local, remote, or both. Force delete for unmerged branches.</td></tr>
-                        <tr><td><strong>Tag</strong></td><td>Create lightweight or annotated tags, push/delete remote tags.</td></tr>
-                    </tbody>
-                </table>
+                <div class="ops-table-wrapper">
+                    <table class="ops-table">
+                        <thead><tr><th>Operation</th><th>What it does</th></tr></thead>
+                        <tbody>
+                            <tr><td><strong>Checkout</strong></td><td>Create, switch, or reset branches. Force checkout supported.</td></tr>
+                            <tr><td><strong>Merge</strong></td><td>Standard, squash, or fast-forward merge with custom commit messages.</td></tr>
+                            <tr><td><strong>Rebase</strong></td><td>Rebase onto another branch. Interactive and <code>--onto</code> supported.</td></tr>
+                            <tr><td><strong>Push</strong></td><td>Push to remote with standard, <code>--force-with-lease</code>, or <code>--force</code> options.</td></tr>
+                            <tr><td><strong>Pull</strong></td><td>Fetch and merge from remote. Optional <code>--rebase</code> mode.</td></tr>
+                            <tr><td><strong>Delete Branch</strong></td><td>Delete local, remote, or both. Force delete for unmerged branches.</td></tr>
+                            <tr><td><strong>Tag</strong></td><td>Create lightweight or annotated tags, push/delete remote tags.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
             <!-- ─── Features ─── -->
@@ -653,23 +698,33 @@ cd GitPilot</code></pre>
 
         // Mobile sidebar toggle
         const sidebarToggle = document.getElementById('sidebarToggle');
+        const navMenuToggle = document.getElementById('navMenuToggle');
         const sidebar = document.getElementById('docsSidebar');
 
-        sidebarToggle.addEventListener('click', () => {
+        function toggleSidebar() {
             sidebar.classList.toggle('open');
-            const icon = sidebarToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-xmark');
-        });
+            const fabIcon = sidebarToggle.querySelector('i');
+            fabIcon.classList.toggle('fa-bars');
+            fabIcon.classList.toggle('fa-xmark');
+            const navIcon = navMenuToggle.querySelector('i');
+            navIcon.classList.toggle('fa-bars');
+            navIcon.classList.toggle('fa-xmark');
+        }
+
+        function closeSidebar() {
+            sidebar.classList.remove('open');
+            sidebarToggle.querySelector('i').className = 'fa-solid fa-bars';
+            navMenuToggle.querySelector('i').className = 'fa-solid fa-bars';
+        }
+
+        sidebarToggle.addEventListener('click', toggleSidebar);
+        navMenuToggle.addEventListener('click', toggleSidebar);
 
         // Close sidebar when clicking a link (mobile)
         sidebarLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 900) {
-                    sidebar.classList.remove('open');
-                    const icon = sidebarToggle.querySelector('i');
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-xmark');
+                    closeSidebar();
                 }
             });
         });
