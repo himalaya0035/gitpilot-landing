@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- Primary Meta Tags -->
-    <title>Getting Started - GitPilot</title>
-    <meta name="title" content="Getting Started - GitPilot">
-    <meta name="description" content="Learn how to install and setup GitPilot using Docker or manual cloning. A step-by-step guide to visual Git workflow management.">
-    
+    <title>Documentation - GitPilot</title>
+    <meta name="title" content="Documentation - GitPilot">
+    <meta name="description" content="Complete guide to GitPilot — visual Git workflow management platform. Learn setup, features, operations, keyboard shortcuts, and more.">
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <!-- FontAwesome for Icons -->
@@ -16,40 +16,136 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
     <style>
-        .page-content { padding: 8rem 2rem; max-width: 800px; margin: 0 auto; }
-        .page-content h1 { margin-bottom: 2rem; font-size: 2.5rem; text-align: center; }
-        .page-content h2 { margin: 3rem 0 1.5rem; font-size: 1.8rem; color: var(--text-primary); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
-        .page-content p { margin-bottom: 1.2rem; color: var(--text-secondary); font-size: 1.1rem; }
-        
-        .setup-card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: var(--border-radius-md);
-            padding: 2.5rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        /* ── Docs Layout ── */
+        .docs-layout {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 5rem;
         }
 
-        .setup-card h3 {
+        /* ── Sidebar ── */
+        .docs-sidebar {
+            position: fixed;
+            top: 5rem;
+            left: 0;
+            width: 280px;
+            height: calc(100vh - 5rem);
+            overflow-y: auto;
+            padding: 2rem 1.5rem;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            background: var(--bg-darker);
+            z-index: 100;
+        }
+
+        .docs-sidebar::-webkit-scrollbar { width: 4px; }
+        .docs-sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+        .sidebar-group { margin-bottom: 1.75rem; }
+
+        .sidebar-group-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            padding-left: 0.75rem;
+        }
+
+        .sidebar-link {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            color: var(--text-primary);
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
+            gap: 0.6rem;
+            padding: 0.55rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: var(--transition-fast);
+            font-weight: 500;
         }
 
-        .setup-card h3 i {
+        .sidebar-link:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary);
+        }
+
+        .sidebar-link.active {
+            background: rgba(99, 102, 241, 0.12);
             color: var(--accent-primary);
         }
 
+        .sidebar-link i { width: 18px; text-align: center; font-size: 0.85rem; }
+
+        /* ── Main Content ── */
+        .docs-main {
+            margin-left: 280px;
+            flex: 1;
+            max-width: 860px;
+            padding: 3rem 4rem 6rem;
+        }
+
+        .docs-main h1 {
+            font-size: 2.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .docs-main .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+        }
+
+        .docs-main h2 {
+            font-size: 1.65rem;
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            color: var(--text-primary);
+        }
+
+        .docs-main h3 {
+            font-size: 1.25rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .docs-main p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+        }
+
+        .docs-main ul, .docs-main ol {
+            padding-left: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .docs-main li {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 0.4rem;
+        }
+
+        .docs-main a:not(.btn) {
+            color: var(--accent-primary);
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        .docs-main a:not(.btn):hover { color: var(--accent-primary-hover); }
+
+        /* ── Code Blocks ── */
         .code-block {
-            background: #000;
+            background: #0a0a0a;
             border-radius: var(--border-radius-sm);
-            padding: 1.5rem;
+            padding: 1.25rem 1.5rem;
             position: relative;
             margin-bottom: 1.5rem;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.06);
             overflow-x: auto;
         }
 
@@ -57,29 +153,151 @@
             margin: 0;
             font-family: var(--font-mono);
             color: #a9b7c6;
-            font-size: 0.95rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
         .code-block .copy-btn {
             position: absolute;
             top: 0.5rem;
             right: 0.5rem;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.08);
             border: none;
             color: var(--text-muted);
-            padding: 0.4rem 0.8rem;
+            padding: 0.35rem 0.7rem;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             transition: var(--transition-fast);
         }
 
-        .code-block .copy-btn:hover {
-            background: rgba(255,255,255,0.2);
-            color: white;
+        .code-block .copy-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+
+        code {
+            font-family: var(--font-mono);
+            background: rgba(255,255,255,0.06);
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #c7d2fe;
         }
 
+        /* ── Cards ── */
+        .docs-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--border-radius-md);
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .docs-card h3 {
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .docs-card h3 i { color: var(--accent-primary); }
+
+        /* ── Feature Grid ── */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--border-radius-sm);
+            padding: 1.25rem;
+        }
+
+        .feature-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-item h4 i { color: var(--accent-primary); font-size: 0.9rem; }
+
+        .feature-item p {
+            font-size: 0.92rem;
+            margin-bottom: 0;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ── Operations Table ── */
+        .ops-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        .ops-table th, .ops-table td {
+            text-align: left;
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 0.95rem;
+        }
+
+        .ops-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .ops-table td { color: var(--text-secondary); }
+
+        .ops-table td:first-child {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* ── Keyboard Shortcut Badges ── */
+        .kbd {
+            display: inline-block;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 4px;
+            padding: 0.1rem 0.45rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ── Alert / Note ── */
+        .docs-note {
+            background: rgba(99, 102, 241, 0.08);
+            border-left: 3px solid var(--accent-primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .docs-note p { margin: 0; font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+
+        .docs-warning {
+            background: rgba(245, 158, 11, 0.08);
+            border-left: 3px solid var(--accent-warning);
+            padding: 1rem 1.25rem;
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .docs-warning p { margin: 0; font-size: 0.95rem; color: rgba(255,255,255,0.85); }
+
+        /* ── Step List ── */
         .step-list {
             list-style: none;
             counter-reset: steps;
@@ -98,7 +316,7 @@
             content: counter(steps);
             position: absolute;
             left: 0;
-            top: -2px;
+            top: 0;
             width: 2rem;
             height: 2rem;
             background: rgba(99, 102, 241, 0.1);
@@ -109,35 +327,58 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
-        .note-alert {
-            background: rgba(245, 158, 11, 0.1);
-            border-left: 4px solid var(--accent-warning);
-            padding: 1rem 1.5rem;
-            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-            margin-top: 1.5rem;
+        /* ── Architecture Diagram (text-based) ── */
+        .arch-block {
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem 2rem;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            white-space: pre;
+            overflow-x: auto;
         }
 
-        .note-alert p {
-            margin: 0;
-            color: rgba(255,255,255,0.9);
-            font-size: 0.95rem;
+        /* ── Mobile Sidebar Toggle ── */
+        .docs-sidebar-toggle {
+            display: none;
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            z-index: 200;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
         }
 
-        .badge-recommended {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--accent-success);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-left: 0.5rem;
-            vertical-align: middle;
+        /* ── Footer offset ── */
+        #footer-placeholder {
+            margin-left: 280px;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 900px) {
+            .docs-sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .docs-sidebar.open { transform: translateX(0); }
+            .docs-sidebar-toggle { display: flex; align-items: center; justify-content: center; }
+            .docs-main { margin-left: 0; padding: 2rem 1.5rem 5rem; }
+            #footer-placeholder { margin-left: 0; }
+            .feature-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -150,121 +391,288 @@
                 <i class="fa-solid fa-code-merge logo-icon"></i>
                 <span>GitPilot</span>
             </a>
-            <div class="nav-links">
-                <a href="index.html#features">Features</a>
-                <a href="index.html#how-it-works">How it Works</a>
-                <a href="blog/index.html">Blog</a>
-            </div>
             <div class="nav-actions">
                 <a href="https://github.com/himalaya0035/GitPilot" target="_blank" class="btn btn-outline" aria-label="Github"><i class="fa-brands fa-github"></i> Star</a>
+                <a href="https://himalaya0035.github.io/GitPilot" target="_blank" class="btn btn-primary"><i class="fa-solid fa-flask"></i> Playground</a>
             </div>
-            <button class="menu-toggle" aria-label="Toggle Menu">
-                <i class="fa-solid fa-bars"></i>
-            </button>
         </div>
     </nav>
 
-    <main class="page-content">
-        <h1 class="text-gradient">Getting Started with GitPilot</h1>
-        <p style="text-align: center; margin-bottom: 4rem;">Set up your visual Git environment in minutes. Choose the installation method that works best for your workflow.</p>
+    <div class="docs-layout">
 
-        <section class="setup-card">
-            <h3><i class="fa-brands fa-docker"></i> Quick Start with Docker <span class="badge-recommended">Recommended</span></h3>
-            <p>The fastest and most reliable way to run GitPilot. It ensures you have all the necessary dependencies isolated from your host system.</p>
-            
-            <ol class="step-list">
-                <li>
-                    Ensure you have <a href="https://docs.docker.com/get-docker/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Docker</a> and Docker Compose installed on your machine.
-                </li>
-                <li>
-                    Create a <code>docker-compose.yml</code> file in your desired workspace directory and add the following configuration:
-                    
-                    <div class="code-block mt-3">
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
-<pre><code>version: '3.8'
-
-services:
-  gitpilot:
-    image: himalaya0035/gitpilot:latest
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./your-repo:/app/repo # Map your local repo here
-    environment:
-      - NODE_ENV=production</code></pre>
-                    </div>
-                </li>
-                <li>
-                    Run the application in detached mode:
-                    <div class="code-block mt-3">
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
-<pre><code>docker-compose up -d</code></pre>
-                    </div>
-                </li>
-                <li>
-                    Open your browser and navigate to <a href="http://localhost:3000" target="_blank" style="color: var(--accent-primary);">http://localhost:3000</a> to start visualizing your Git tree.
-                </li>
-            </ol>
-            
-            <div class="note-alert">
-                <p><strong><i class="fa-solid fa-circle-info"></i> Note:</strong> Make sure to update the volume mapping <code>./your-repo:/app/repo</code> to point to the actual path of the Git repository you want to analyze.</p>
+        <!-- Sidebar -->
+        <aside class="docs-sidebar" id="docsSidebar">
+            <div class="sidebar-group">
+                <div class="sidebar-group-title">Introduction</div>
+                <a href="#what-is-gitpilot" class="sidebar-link active"><i class="fa-solid fa-circle-info"></i> What is GitPilot</a>
+                <a href="#try-playground" class="sidebar-link"><i class="fa-solid fa-flask"></i> Try the Playground</a>
             </div>
-        </section>
+            <div class="sidebar-group">
+                <div class="sidebar-group-title">Getting Started</div>
+                <a href="#installation" class="sidebar-link"><i class="fa-solid fa-download"></i> Installation</a>
+                <a href="#connecting-repo" class="sidebar-link"><i class="fa-solid fa-plug"></i> Connecting a Repo</a>
+            </div>
+            <div class="sidebar-group">
+                <div class="sidebar-group-title">Using GitPilot</div>
+                <a href="#workflow-editor" class="sidebar-link"><i class="fa-solid fa-diagram-project"></i> Workflow Editor</a>
+                <a href="#operations" class="sidebar-link"><i class="fa-solid fa-gears"></i> Operations</a>
+                <a href="#features" class="sidebar-link"><i class="fa-solid fa-bolt"></i> Features</a>
+            </div>
+            <div class="sidebar-group">
+                <div class="sidebar-group-title">Advanced</div>
+                <a href="#architecture" class="sidebar-link"><i class="fa-solid fa-layer-group"></i> Architecture</a>
+            </div>
+        </aside>
 
-        <section class="setup-card">
-            <h3><i class="fa-solid fa-terminal"></i> Manual Setup</h3>
-            <p>If you prefer to run GitPilot natively or want to contribute to the development, you can clone the repository directly.</p>
-            
-            <ol class="step-list">
-                <li>
-                    Clone the GitHub repository:
-                    <div class="code-block mt-3">
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+        <!-- Main Content -->
+        <main class="docs-main">
+
+            <!-- ─── What is GitPilot ─── -->
+            <section id="what-is-gitpilot">
+                <h1 class="text-gradient">GitPilot Documentation</h1>
+                <p class="subtitle">Visual Git workflow management and execution platform.</p>
+
+                <h2>What is GitPilot?</h2>
+                <p>
+                    GitPilot transforms complex, multi-step Git operations into a visual drag-and-drop interface. Place branch nodes on a canvas, connect them with operations (merge, rebase, push, pull, etc.), preview every command before it runs, and execute the whole workflow in real-time with live terminal feedback.
+                </p>
+
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4><i class="fa-solid fa-diagram-project"></i> Visual Drag-and-Drop</h4>
+                        <p>Design branch networks and connect operations on an interactive canvas.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fa-solid fa-bolt"></i> Real-time Execution</h4>
+                        <p>Live terminal logs, progress tracking, and instant feedback.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fa-solid fa-shield-halved"></i> Risk Analysis</h4>
+                        <p>Dry-run preview with risk ratings before anything runs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4><i class="fa-solid fa-arrows-split-up-and-left"></i> Smart Dependencies</h4>
+                        <p>Automatic ordering with parallel execution of independent steps.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ─── Playground ─── -->
+            <section id="try-playground">
+                <h2>Try the Playground</h2>
+                <div class="docs-card" style="display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;">
+                    <div>
+                        <h3 style="margin: 0;"><i class="fa-solid fa-flask"></i> GitPilot Playground</h3>
+                        <p style="margin: 0.5rem 0 0; font-size: 0.95rem;">Explore the workflow editor directly in your browser — no installation, no backend, no Git repository needed.</p>
+                    </div>
+                    <a href="https://himalaya0035.github.io/GitPilot" target="_blank" class="btn btn-primary" style="white-space: nowrap;">Open Playground <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </section>
+
+            <!-- ─── Installation ─── -->
+            <section id="installation">
+                <h2>Installation</h2>
+                <p>Requires <strong>Node.js v18+</strong>, <strong>npm v9+</strong>, and <strong>Git v2.25+</strong>.</p>
+
+                <h3>Quick Install (one command)</h3>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>curl -fsSL https://raw.githubusercontent.com/himalaya0035/GitPilot/main/install.sh | bash</code></pre>
+                </div>
+                <p>This clones the repo, creates the env file, installs all dependencies, and tells you how to start. Or follow the manual steps below:</p>
+
+                <h3>Manual Setup</h3>
+                <ol class="step-list">
+                    <li>
+                        <strong>Clone the repository</strong>
+                        <p>Using HTTPS:</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
 <pre><code>git clone https://github.com/himalaya0035/GitPilot.git
 cd GitPilot</code></pre>
-                    </div>
-                </li>
-                <li>
-                    Install the necessary dependencies (requires Node.js v18+):
-                    <div class="code-block mt-3">
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
-<pre><code>npm install</code></pre>
-                    </div>
-                </li>
-                <li>
-                    Start the development server:
-                    <div class="code-block mt-3">
-                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
-<pre><code>npm run dev</code></pre>
-                    </div>
-                </li>
-            </ol>
-        </section>
+                        </div>
+                        <p>Or using SSH:</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>git clone git@github.com:himalaya0035/GitPilot.git
+cd GitPilot</code></pre>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Create the environment file</strong>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>cp backend/.env.example backend/.env</code></pre>
+                        </div>
+                        <p>By default GitPilot uses in-memory storage (workflows are lost on restart). To persist data, open <code>backend/.env</code> and set <code>USE_MONGODB=true</code> with your MongoDB connection string.</p>
+                    </li>
+                    <li>
+                        <strong>Run the startup script</strong>
+                        <p>Installs all dependencies automatically and starts both servers:</p>
+                        <div class="code-block">
+                            <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>chmod +x start-dev.sh
+./start-dev.sh</code></pre>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>Open GitPilot</strong> at <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+                    </li>
+                </ol>
+            </section>
 
-    </main>
+            <!-- ─── Connecting a Repo ─── -->
+            <section id="connecting-repo">
+                <h2>Connecting a Repository</h2>
+                <p>
+                    Click <strong>"Connect Repository"</strong> in the top bar and enter the absolute path to any Git repository on your machine. GitPilot validates the path, detects your current branch, checks for uncommitted changes, and lists all branches. Recently connected repos are saved for quick switching.
+                </p>
+                <div class="docs-warning">
+                    <p><strong>Note:</strong> GitPilot prevents connecting to its own directory as a safety measure.</p>
+                </div>
+            </section>
+
+            <!-- ─── Workflow Editor ─── -->
+            <section id="workflow-editor">
+                <h2>Workflow Editor</h2>
+                <p>
+                    The editor is a visual canvas where you place <strong>branch nodes</strong> and connect them with <strong>operation edges</strong>. Each branch is color-coded by type (production, feature, develop, release, hotfix, staging, integration) and can be configured with auto-pull/push, remote settings, and tags. Click any edge to configure the operation's options. Use the <strong>Beautify</strong> button to auto-arrange the layout.
+                </p>
+            </section>
+
+            <!-- ─── Operations ─── -->
+            <section id="operations">
+                <h2>Operations</h2>
+                <p>Seven fully configurable Git operations:</p>
+
+                <table class="ops-table">
+                    <thead><tr><th>Operation</th><th>What it does</th></tr></thead>
+                    <tbody>
+                        <tr><td><strong>Checkout</strong></td><td>Create, switch, or reset branches. Force checkout supported.</td></tr>
+                        <tr><td><strong>Merge</strong></td><td>Standard, squash, or fast-forward merge with custom commit messages.</td></tr>
+                        <tr><td><strong>Rebase</strong></td><td>Rebase onto another branch. Interactive and <code>--onto</code> supported.</td></tr>
+                        <tr><td><strong>Push</strong></td><td>Push to remote with standard, <code>--force-with-lease</code>, or <code>--force</code> options.</td></tr>
+                        <tr><td><strong>Pull</strong></td><td>Fetch and merge from remote. Optional <code>--rebase</code> mode.</td></tr>
+                        <tr><td><strong>Delete Branch</strong></td><td>Delete local, remote, or both. Force delete for unmerged branches.</td></tr>
+                        <tr><td><strong>Tag</strong></td><td>Create lightweight or annotated tags, push/delete remote tags.</td></tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- ─── Features ─── -->
+            <section id="features">
+                <h2>Features</h2>
+
+                <h3>Preview & Risk Analysis</h3>
+                <p>
+                    Run a dry-run preview before executing. Every command is shown with a risk level (<span style="color: var(--accent-success);">low</span> / <span style="color: var(--accent-warning);">medium</span> / <span style="color: var(--accent-danger);">high</span>), warnings for dangerous operations, estimated duration, and conflict predictions.
+                </p>
+
+                <h3>Execution Engine</h3>
+                <p>
+                    Hit <strong>Run</strong> and watch a live terminal feed of every Git command. The engine resolves dependencies automatically, runs independent operations in parallel, and lets you abort at any time. Configure abort-on-error or continue-on-error per workflow.
+                </p>
+
+                <h3>Workflow Management</h3>
+                <p>
+                    Save, load, duplicate, import/export (JSON), and search workflows. Browse execution history with full logs and timestamps. Auto-save keeps your work safe with <span class="kbd">Ctrl</span> + <span class="kbd">S</span>.
+                </p>
+            </section>
+
+            <!-- ─── Architecture ─── -->
+            <section id="architecture">
+                <h2>Architecture</h2>
+                <p>
+                    React frontend communicating with a Node.js/Express backend over REST and WebSockets (Socket.IO).
+                </p>
+
+                <div class="arch-block">Browser (React + React Flow)
+    |
+    |── REST API ──> Express Server (port 5000)
+    |                   ├── Workflow CRUD
+    |                   ├── Git Service (executes commands)
+    |                   ├── Workflow Executor (dependency resolution)
+    |                   └── Preview Service (dry-run)
+    |
+    └── Socket.IO ──> Real-time execution logs & progress</div>
+
+                <div class="feature-grid" style="margin-top: 1rem;">
+                    <div class="feature-item">
+                        <h4>Frontend</h4>
+                        <p>React 18, React Flow, Dagre, Lucide, Socket.IO Client</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>Backend</h4>
+                        <p>Express, Socket.IO, child_process, In-memory or MongoDB storage</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Mobile sidebar toggle -->
+    <button class="docs-sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+        <i class="fa-solid fa-bars"></i>
+    </button>
 
     <div id="footer-placeholder"></div>
     <script src="js/load-footer.js"></script>
 
-    <!-- Simple script for the copy buttons -->
     <script>
+        // Copy code button
         function copyCode(btn) {
             const codeBlock = btn.nextElementSibling;
             const textToCopy = codeBlock.textContent;
-            
             navigator.clipboard.writeText(textToCopy).then(() => {
                 const originalText = btn.innerHTML;
                 btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
                 btn.style.color = 'var(--accent-success)';
-                btn.style.borderColor = 'var(--accent-success)';
-                
                 setTimeout(() => {
                     btn.innerHTML = originalText;
                     btn.style.color = '';
-                    btn.style.borderColor = '';
                 }, 2000);
             });
         }
+
+        // Sidebar active link tracking
+        const sections = document.querySelectorAll('section[id]');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    sidebarLinks.forEach(link => link.classList.remove('active'));
+                    const activeLink = document.querySelector(`.sidebar-link[href="#${entry.target.id}"]`);
+                    if (activeLink) activeLink.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-20% 0px -60% 0px' });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Mobile sidebar toggle
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        const sidebar = document.getElementById('docsSidebar');
+
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            const icon = sidebarToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        });
+
+        // Close sidebar when clicking a link (mobile)
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 900) {
+                    sidebar.classList.remove('open');
+                    const icon = sidebarToggle.querySelector('i');
+                    icon.classList.add('fa-bars');
+                    icon.classList.remove('fa-xmark');
+                }
+            });
+        });
     </script>
 </body>
 </html>
