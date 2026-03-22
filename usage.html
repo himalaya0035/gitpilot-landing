@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Getting Started - GitPilot</title>
+    <meta name="title" content="Getting Started - GitPilot">
+    <meta name="description" content="Learn how to install and setup GitPilot using Docker or manual cloning. A step-by-step guide to visual Git workflow management.">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-content { padding: 8rem 2rem; max-width: 800px; margin: 0 auto; }
+        .page-content h1 { margin-bottom: 2rem; font-size: 2.5rem; text-align: center; }
+        .page-content h2 { margin: 3rem 0 1.5rem; font-size: 1.8rem; color: var(--text-primary); border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
+        .page-content p { margin-bottom: 1.2rem; color: var(--text-secondary); font-size: 1.1rem; }
+        
+        .setup-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--border-radius-md);
+            padding: 2.5rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .setup-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .setup-card h3 i {
+            color: var(--accent-primary);
+        }
+
+        .code-block {
+            background: #000;
+            border-radius: var(--border-radius-sm);
+            padding: 1.5rem;
+            position: relative;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.05);
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: var(--font-mono);
+            color: #a9b7c6;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .code-block .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--text-muted);
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition-fast);
+        }
+
+        .code-block .copy-btn:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .step-list {
+            list-style: none;
+            counter-reset: steps;
+            padding: 0;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .step-list li::before {
+            counter-increment: steps;
+            content: counter(steps);
+            position: absolute;
+            left: 0;
+            top: -2px;
+            width: 2rem;
+            height: 2rem;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent-primary);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .note-alert {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--accent-warning);
+            padding: 1rem 1.5rem;
+            border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
+            margin-top: 1.5rem;
+        }
+
+        .note-alert p {
+            margin: 0;
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95rem;
+        }
+
+        .badge-recommended {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-success);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="dark-theme">
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-code-merge logo-icon"></i>
+                <span>GitPilot</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#how-it-works">How it Works</a>
+                <a href="blog/index.html">Blog</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://github.com/himalaya0035/GitPilot" target="_blank" class="btn btn-outline" aria-label="Github"><i class="fa-brands fa-github"></i> Star</a>
+            </div>
+            <button class="menu-toggle" aria-label="Toggle Menu">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <main class="page-content">
+        <h1 class="text-gradient">Getting Started with GitPilot</h1>
+        <p style="text-align: center; margin-bottom: 4rem;">Set up your visual Git environment in minutes. Choose the installation method that works best for your workflow.</p>
+
+        <section class="setup-card">
+            <h3><i class="fa-brands fa-docker"></i> Quick Start with Docker <span class="badge-recommended">Recommended</span></h3>
+            <p>The fastest and most reliable way to run GitPilot. It ensures you have all the necessary dependencies isolated from your host system.</p>
+            
+            <ol class="step-list">
+                <li>
+                    Ensure you have <a href="https://docs.docker.com/get-docker/" target="_blank" style="color: var(--accent-primary); text-decoration: underline;">Docker</a> and Docker Compose installed on your machine.
+                </li>
+                <li>
+                    Create a <code>docker-compose.yml</code> file in your desired workspace directory and add the following configuration:
+                    
+                    <div class="code-block mt-3">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>version: '3.8'
+
+services:
+  gitpilot:
+    image: himalaya0035/gitpilot:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./your-repo:/app/repo # Map your local repo here
+    environment:
+      - NODE_ENV=production</code></pre>
+                    </div>
+                </li>
+                <li>
+                    Run the application in detached mode:
+                    <div class="code-block mt-3">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>docker-compose up -d</code></pre>
+                    </div>
+                </li>
+                <li>
+                    Open your browser and navigate to <a href="http://localhost:3000" target="_blank" style="color: var(--accent-primary);">http://localhost:3000</a> to start visualizing your Git tree.
+                </li>
+            </ol>
+            
+            <div class="note-alert">
+                <p><strong><i class="fa-solid fa-circle-info"></i> Note:</strong> Make sure to update the volume mapping <code>./your-repo:/app/repo</code> to point to the actual path of the Git repository you want to analyze.</p>
+            </div>
+        </section>
+
+        <section class="setup-card">
+            <h3><i class="fa-solid fa-terminal"></i> Manual Setup</h3>
+            <p>If you prefer to run GitPilot natively or want to contribute to the development, you can clone the repository directly.</p>
+            
+            <ol class="step-list">
+                <li>
+                    Clone the GitHub repository:
+                    <div class="code-block mt-3">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>git clone https://github.com/himalaya0035/GitPilot.git
+cd GitPilot</code></pre>
+                    </div>
+                </li>
+                <li>
+                    Install the necessary dependencies (requires Node.js v18+):
+                    <div class="code-block mt-3">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>npm install</code></pre>
+                    </div>
+                </li>
+                <li>
+                    Start the development server:
+                    <div class="code-block mt-3">
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+<pre><code>npm run dev</code></pre>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="js/load-footer.js"></script>
+
+    <!-- Simple script for the copy buttons -->
+    <script>
+        function copyCode(btn) {
+            const codeBlock = btn.nextElementSibling;
+            const textToCopy = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                btn.style.color = 'var(--accent-success)';
+                btn.style.borderColor = 'var(--accent-success)';
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.color = '';
+                    btn.style.borderColor = '';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
